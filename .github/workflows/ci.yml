@@ -24,4 +24,4 @@ jobs:
       - run: pnpm check
       - name: Verify generated artifacts are current
         run: git diff --exit-code -- lib
-      - run: pnpm pack --dry-run
+      - run: npm pack --dry-run --ignore-scripts
