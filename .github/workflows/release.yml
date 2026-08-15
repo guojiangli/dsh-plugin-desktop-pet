@@ -24,7 +24,20 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
-      - run: npm publish --access public --provenance
+      - name: Check npm version
+        id: registry
+        shell: bash
+        run: |
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          if npm view "$name@$version" version --registry=https://registry.npmjs.org/ >/dev/null 2>&1; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish to npm
+        if: steps.registry.outputs.publish == 'true'
+        run: npm publish --access public --provenance
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
