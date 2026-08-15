@@ -1,0 +1,4 @@
+# Mount the browser plugin after the Web bundle declares shell and settings slots.
+- insert:
+    - id: desktop-pet
+      name: '@liguojiang/dsh-plugin-desktop-pet'
