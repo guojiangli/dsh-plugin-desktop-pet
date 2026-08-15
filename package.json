@@ -53,7 +53,8 @@
   },
   "publishConfig": {
     "access": "public",
-    "provenance": true
+    "provenance": true,
+    "registry": "https://registry.npmjs.org/"
   },
   "packageManager": "pnpm@10.15.1",
   "pnpm": {
